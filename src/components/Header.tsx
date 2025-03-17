@@ -22,6 +22,7 @@ import { useGetCategoriesQuery } from "@/todoApi";
 import type { Category } from "@/todoApi";
 import { AppDispatch, RootState } from "@/store/store";
 import { useAddTodoMutation } from "@/todoApi";
+import { toast } from "sonner";
 
 const Header = () => {
   const { setTheme, theme } = useTheme();
@@ -33,6 +34,23 @@ const Header = () => {
   const [newTodoCategory, setNewTodoCategory] = useState("all");
   const [newTodoText, setNewTodoText] = useState("");
   const [addTodo, { isLoading }] = useAddTodoMutation();
+
+  const handleAddTodo = async () => {
+    try {
+      await addTodo({
+        text: newTodoText,
+        category: newTodoCategory,
+        description: "",
+        completed: false,
+      }).unwrap();
+      setNewTodoText("");
+      toast.success("New todo added");
+    } catch (error) {
+      console.error("Failed to add todo:", error);
+      toast.error("Failed to add todo");
+    }
+  };
+
   return (
     <header className="flex w-full flex-col items-center justify-between gap-4">
       <div className="flex w-full justify-between">
@@ -62,6 +80,16 @@ const Header = () => {
           placeholder="Add a new todo..."
           value={newTodoText}
           onChange={(e) => setNewTodoText(e.target.value)}
+          onKeyDown={(e) => {
+            if (
+              e.key === "Enter" &&
+              !isLoading &&
+              newTodoCategory !== "all" &&
+              newTodoText.trim()
+            ) {
+              handleAddTodo();
+            }
+          }}
         />
         <Select value={newTodoCategory} onValueChange={setNewTodoCategory}>
           <SelectTrigger>
@@ -83,19 +111,7 @@ const Header = () => {
             newTodoCategory === "all" || !newTodoText.trim() || isLoading
           }
           className="cursor-pointer"
-          onClick={async () => {
-            try {
-              await addTodo({
-                text: newTodoText,
-                category: newTodoCategory,
-                description: "",
-                completed: false,
-              }).unwrap();
-              setNewTodoText("");
-            } catch (error) {
-              console.error("Failed to add todo:", error);
-            }
-          }}
+          onClick={handleAddTodo}
         >
           {isLoading ? "Adding..." : "+ Add"}
         </Button>

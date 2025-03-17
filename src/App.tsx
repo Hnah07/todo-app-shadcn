@@ -19,6 +19,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { Toaster, toast } from "sonner";
 
 const App = () => {
   const { data: todos = [] } = useGetTodosQuery();
@@ -44,6 +45,8 @@ const App = () => {
     updateTodo({
       ...todo,
       description: newDescription,
+    }).then(() => {
+      toast.success("Description updated");
     });
   };
 
@@ -57,13 +60,22 @@ const App = () => {
       updateTodo({
         ...todo,
         text: editingTitle.trim(),
+      }).then(() => {
+        toast.success("Title updated");
+        setEditingTitleId(null);
       });
-      setEditingTitleId(null);
     }
+  };
+
+  const handleDelete = (todoId: string) => {
+    deleteTodo(todoId).then(() => {
+      toast.success("Todo deleted");
+    });
   };
 
   return (
     <Layout>
+      <Toaster />
       <div className="space-y-4">
         {[...todos]
           .sort((a, b) => parseInt(b.id) - parseInt(a.id))
@@ -80,7 +92,16 @@ const App = () => {
                 <Checkbox
                   checked={todo.completed}
                   onCheckedChange={(checked) => {
-                    toggleTodo({ id: todo.id, completed: checked as boolean });
+                    toggleTodo({
+                      id: todo.id,
+                      completed: checked as boolean,
+                    }).then(() => {
+                      toast.success(
+                        todo.completed
+                          ? "Todo marked as incomplete"
+                          : "Todo marked as complete",
+                      );
+                    });
                   }}
                 />
                 {editingTitleId === todo.id ? (
@@ -143,7 +164,7 @@ const App = () => {
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8 text-gray-600 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"
-                    onClick={() => deleteTodo(todo.id)}
+                    onClick={() => handleDelete(todo.id)}
                   >
                     <X className="size-4" />
                   </Button>
