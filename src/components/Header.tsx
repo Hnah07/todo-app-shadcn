@@ -8,10 +8,28 @@ import {
   DropdownMenuItem,
 } from "./ui/dropdown-menu";
 import { Input } from "./ui/input";
-import { Select, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "./ui/select";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory, setStatus } from "../store/filterSlice";
+import { useGetCategoriesQuery } from "../todoApi";
+import type { Category } from "../todoApi";
+import { AppDispatch, RootState } from "@/store/store";
 
 const Header = () => {
   const { setTheme, theme } = useTheme();
+  const dispatch = useDispatch<AppDispatch>();
+  const { data: categories = [] } = useGetCategoriesQuery();
+  const { selectedCategory, selectedStatus } = useSelector(
+    (state: RootState) => state.filters,
+  );
+  const [newTodoCategory, setNewTodoCategory] = useState("all");
 
   return (
     <header className="flex w-full flex-col items-center justify-between gap-4">
@@ -39,23 +57,52 @@ const Header = () => {
       </div>
       <div className="flex w-full justify-between gap-2">
         <Input placeholder="Add a new todo..." />
-        <Select>
+        <Select value={newTodoCategory} onValueChange={setNewTodoCategory}>
           <SelectTrigger>
-            <SelectValue placeholder="Select a priority" />
+            <SelectValue placeholder="Select category" />
           </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All categories</SelectItem>
+            {categories.map((category: Category) => (
+              <SelectItem key={category.name} value={category.name}>
+                {category.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
         </Select>
         <Button>+ Add</Button>
       </div>
       <div className="flex w-full gap-2">
-        <Select>
+        <Select
+          value={selectedCategory}
+          onValueChange={(value) => dispatch(setCategory(value))}
+        >
           <SelectTrigger>
-            <SelectValue placeholder="All categories" />
+            <SelectValue placeholder="Filter by category" />
           </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All categories</SelectItem>
+            {categories.map((category: Category) => (
+              <SelectItem key={category.name} value={category.name}>
+                {category.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
         </Select>
-        <Select>
+        <Select
+          value={selectedStatus}
+          onValueChange={(value) =>
+            dispatch(setStatus(value as "all" | "completed" | "active"))
+          }
+        >
           <SelectTrigger>
             <SelectValue placeholder="All statuses" />
           </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All statuses</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+            <SelectItem value="active">Active</SelectItem>
+          </SelectContent>
         </Select>
       </div>
     </header>

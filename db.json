@@ -3,96 +3,112 @@
     {
       "id": "1",
       "text": "Learn React",
+      "description": "Go through tutorials and build small projects to understand React fundamentals.",
       "completed": true,
       "category": "Work"
     },
     {
       "id": "2",
       "text": "Build a todo app",
+      "description": "Create a simple to-do list application using React and state management.",
       "completed": false,
       "category": "Work"
     },
     {
       "id": "3",
       "text": "Go for a run",
+      "description": "Run for at least 30 minutes to improve fitness and mental clarity.",
       "completed": false,
       "category": "Personal"
     },
     {
       "id": "4",
       "text": "Read a book",
+      "description": "Spend time reading a fiction or non-fiction book to relax and gain knowledge.",
       "completed": false,
       "category": "Personal"
     },
     {
       "id": "5",
       "text": "Buy groceries",
+      "description": "Purchase essential food items and household supplies for the week.",
       "completed": false,
       "category": "Shopping"
     },
     {
       "id": "6",
       "text": "Prepare presentation for client meeting",
+      "description": "Create slides and key talking points for an upcoming client meeting.",
       "completed": false,
       "category": "Work"
     },
     {
       "id": "7",
       "text": "Review project timeline",
+      "description": "Check the current status of tasks and deadlines in the project plan.",
       "completed": true,
       "category": "Work"
     },
     {
       "id": "8",
       "text": "Update documentation",
+      "description": "Revise and expand project documentation to keep it accurate and up-to-date.",
       "completed": false,
       "category": "Work"
     },
     {
       "id": "9",
       "text": "Fix bug in login component",
+      "description": "Debug and resolve authentication issues in the login component.",
       "completed": true,
       "category": "Work"
     },
     {
       "id": "10",
       "text": "Attend team standup",
+      "description": "Join the daily team meeting to discuss progress and roadblocks.",
       "completed": false,
       "category": "Work"
     },
     {
       "id": "18",
       "text": "Call mom",
+      "description": "Have a conversation with mom to catch up and check in.",
       "completed": true,
       "category": "Personal"
     },
     {
       "id": "19",
       "text": "Schedule dentist appointment",
+      "description": "Book an appointment for a dental check-up and cleaning.",
       "completed": false,
       "category": "Personal"
     },
     {
       "id": "39",
       "text": "30 minute workout",
+      "description": "Do a strength or cardio workout for at least 30 minutes.",
       "completed": false,
       "category": "Health"
     },
     {
       "id": "40",
       "text": "Drink 8 glasses of water",
+      "description": "Ensure proper hydration by drinking enough water throughout the day.",
       "completed": true,
       "category": "Health"
     },
     {
       "id": "47",
       "text": "Complete online course module",
+      "description": "Finish a section of an online course to continue learning and upskilling.",
       "completed": false,
       "category": "Learning"
     },
     {
       "id": "48",
       "text": "Read chapter of technical book",
+      "description": "Read and understand a chapter from a technical book to enhance knowledge.",
       "completed": true,
       "category": "Learning"
     }
