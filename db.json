@@ -111,6 +111,27 @@
       "description": "Read and understand a chapter from a technical book to enhance knowledge.",
       "completed": true,
       "category": "Learning"
+    },
+    {
+      "id": "d52a",
+      "text": "New Todo",
+      "category": "all",
+      "description": "",
+      "completed": false
+    },
+    {
+      "id": "b617",
+      "text": "New Todo",
+      "category": "Personal",
+      "description": "",
+      "completed": false
+    },
+    {
+      "id": "81b5",
+      "text": "",
+      "category": "all",
+      "description": "",
+      "completed": false
     }
   ],
   "categories": [

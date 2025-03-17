@@ -21,6 +21,7 @@ import { setCategory, setStatus } from "../store/filterSlice";
 import { useGetCategoriesQuery } from "../todoApi";
 import type { Category } from "../todoApi";
 import { AppDispatch, RootState } from "@/store/store";
+import { useAddTodoMutation } from "../todoApi";
 
 const Header = () => {
   const { setTheme, theme } = useTheme();
@@ -30,7 +31,8 @@ const Header = () => {
     (state: RootState) => state.filters,
   );
   const [newTodoCategory, setNewTodoCategory] = useState("all");
-
+  const [newTodoText, setNewTodoText] = useState("");
+  const [addTodo] = useAddTodoMutation();
   return (
     <header className="flex w-full flex-col items-center justify-between gap-4">
       <div className="flex w-full justify-between">
@@ -56,13 +58,19 @@ const Header = () => {
         </DropdownMenu>
       </div>
       <div className="flex w-full justify-between gap-2">
-        <Input placeholder="Add a new todo..." />
+        <Input
+          placeholder="Add a new todo..."
+          value={newTodoText}
+          onChange={(e) => setNewTodoText(e.target.value)}
+        />
         <Select value={newTodoCategory} onValueChange={setNewTodoCategory}>
           <SelectTrigger>
-            <SelectValue placeholder="Select category" />
+            <SelectValue placeholder="Select a category" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All categories</SelectItem>
+            <SelectItem value="all" disabled>
+              Select a category
+            </SelectItem>
             {categories.map((category: Category) => (
               <SelectItem key={category.name} value={category.name}>
                 {category.name}
@@ -70,7 +78,21 @@ const Header = () => {
             ))}
           </SelectContent>
         </Select>
-        <Button>+ Add</Button>
+        <Button
+          disabled={newTodoCategory === "all" || !newTodoText.trim()}
+          className="cursor-pointer"
+          onClick={() => {
+            addTodo({
+              text: newTodoText,
+              category: newTodoCategory,
+              description: "",
+              completed: false,
+            });
+            setNewTodoText("");
+          }}
+        >
+          + Add
+        </Button>
       </div>
       <div className="flex w-full gap-2">
         <Select
