@@ -88,14 +88,14 @@
       "id": "39",
       "text": "30 minute workout",
       "description": "Do a strength or cardio workout for at least 30 minutes.",
-      "completed": false,
+      "completed": true,
       "category": "Health"
     },
     {
       "id": "40",
       "text": "Drink 8 glasses of water",
       "description": "Ensure proper hydration by drinking enough water throughout the day.",
-      "completed": false,
+      "completed": true,
       "category": "Health"
     },
     {
@@ -111,13 +111,6 @@
       "description": "Read and understand a chapter from a technical book to enhance knowledge.",
       "completed": false,
       "category": "Learning"
-    },
-    {
-      "id": "49",
-      "text": "test",
-      "category": "Personal",
-      "description": "",
-      "completed": true
     }
   ],
   "categories": [
