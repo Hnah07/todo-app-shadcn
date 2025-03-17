@@ -9,7 +9,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="mx-auto mt-4 flex min-h-screen max-w-screen-sm flex-col">
       <Header />
-      <main className="container mx-auto flex-1 p-4">{children}</main>
+      <main className="container mx-auto flex-1 py-4">{children}</main>
     </div>
   );
 };

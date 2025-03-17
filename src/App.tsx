@@ -22,7 +22,7 @@ const App = () => {
       <div className="space-y-4">
         {todos.map((todo) => (
           <Collapsible
-            className={`rounded-md border-1 border-gray-200 px-4 py-2 ${
+            className={`w-full rounded-md border-1 border-gray-200 px-6 py-2 ${
               todo.completed ? "bg-gray-50 dark:bg-gray-800/50" : ""
             }`}
             key={todo.id}
