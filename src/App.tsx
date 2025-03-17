@@ -5,6 +5,8 @@ import {
   useGetTodosQuery,
   useToggleTodoMutation,
   useDeleteTodoMutation,
+  useUpdateTodoMutation,
+  Todo,
 } from "@/todoApi";
 import { badgeVariants } from "@/components/ui/badge";
 import {
@@ -12,16 +14,53 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp, Pencil, X } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, ChevronUp, Pencil, X, Check } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 
 const App = () => {
   const { data: todos = [] } = useGetTodosQuery();
   const [toggleTodo] = useToggleTodoMutation();
   const [deleteTodo] = useDeleteTodoMutation();
+  const [updateTodo] = useUpdateTodoMutation();
   const [openId, setOpenId] = useState<string | null>(null);
+  const [editingDescription, setEditingDescription] = useState<string>("");
+  const [editingTitleId, setEditingTitleId] = useState<string | null>(null);
+  const [editingTitle, setEditingTitle] = useState<string>("");
+
+  useEffect(() => {
+    if (openId) {
+      const todo = todos.find((t) => t.id === openId);
+      if (todo) {
+        setEditingDescription(todo.description);
+      }
+    }
+  }, [openId, todos]);
+
+  const handleDescriptionChange = (todo: Todo, newDescription: string) => {
+    setEditingDescription(newDescription);
+    updateTodo({
+      ...todo,
+      description: newDescription,
+    });
+  };
+
+  const handleTitleEdit = (todo: Todo) => {
+    setEditingTitleId(todo.id);
+    setEditingTitle(todo.text);
+  };
+
+  const handleTitleSave = (todo: Todo) => {
+    if (editingTitle.trim()) {
+      updateTodo({
+        ...todo,
+        text: editingTitle.trim(),
+      });
+      setEditingTitleId(null);
+    }
+  };
 
   return (
     <Layout>
@@ -44,11 +83,43 @@ const App = () => {
                     toggleTodo({ id: todo.id, completed: checked as boolean });
                   }}
                 />
-                <p
-                  className={`flex-1 ${todo.completed ? "text-gray-500 line-through" : ""}`}
-                >
-                  {todo.text}
-                </p>
+                {editingTitleId === todo.id ? (
+                  <div className="flex flex-1 items-center gap-2">
+                    <Input
+                      value={editingTitle}
+                      onChange={(e) => setEditingTitle(e.target.value)}
+                      className="h-8"
+                      autoFocus
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleTitleSave(todo);
+                        }
+                      }}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => handleTitleSave(todo)}
+                    >
+                      <Check className="size-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => setEditingTitleId(null)}
+                    >
+                      <X className="size-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <p
+                    className={`flex-1 ${todo.completed ? "text-gray-500 line-through" : ""}`}
+                  >
+                    {todo.text}
+                  </p>
+                )}
                 <div className="flex items-center gap-2">
                   <Badge variant={todo.category as keyof typeof badgeVariants}>
                     {todo.category}
@@ -64,6 +135,7 @@ const App = () => {
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                    onClick={() => handleTitleEdit(todo)}
                   >
                     <Pencil className="size-4" />
                   </Button>
@@ -80,9 +152,15 @@ const App = () => {
               <CollapsibleContent>
                 <div className="-mx-4 my-2 h-px w-[calc(100%+2rem)] bg-gray-200" />
                 <p className="text-sm text-gray-500">Description</p>
-                <Textarea className="mt-2 text-sm text-gray-500">
-                  {todo.description}
-                </Textarea>
+                <Textarea
+                  className="mt-2 text-sm text-gray-500"
+                  value={
+                    openId === todo.id ? editingDescription : todo.description
+                  }
+                  onChange={(e) =>
+                    handleDescriptionChange(todo, e.target.value)
+                  }
+                />
               </CollapsibleContent>
             </Collapsible>
           ))}
