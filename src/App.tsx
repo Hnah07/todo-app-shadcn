@@ -23,7 +23,7 @@ const App = () => {
         {todos.map((todo) => (
           <Collapsible
             className={`rounded-md border-1 border-gray-200 px-4 py-2 ${
-              todo.completed ? "bg-gray-50" : ""
+              todo.completed ? "bg-gray-50 dark:bg-gray-800/50" : ""
             }`}
             key={todo.id}
             open={openId === todo.id}
@@ -47,13 +47,17 @@ const App = () => {
                     <ChevronDown className="size-4" />
                   )}
                 </CollapsibleTrigger>
-                <Button variant="ghost" size="icon" className="h-8 w-8">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                >
                   <Pencil className="size-4" />
                 </Button>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 hover:text-red-600"
+                  className="h-8 w-8 text-gray-600 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"
                 >
                   <X className="size-4" />
                 </Button>
