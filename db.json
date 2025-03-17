@@ -132,6 +132,55 @@
       "category": "all",
       "description": "",
       "completed": false
+    },
+    {
+      "id": "88fd",
+      "text": "test",
+      "category": "Personal",
+      "description": "",
+      "completed": false
+    },
+    {
+      "id": "d23d",
+      "text": "blablabla",
+      "category": "Work",
+      "description": "",
+      "completed": false
+    },
+    {
+      "id": "a90a",
+      "text": "test",
+      "category": "Health",
+      "description": "",
+      "completed": false
+    },
+    {
+      "id": "a90a",
+      "text": "nog een test wajoooo",
+      "category": "Shopping",
+      "description": "",
+      "completed": false
+    },
+    {
+      "id": "30b9",
+      "text": "loading test",
+      "category": "Work",
+      "description": "",
+      "completed": false
+    },
+    {
+      "id": "89",
+      "text": "id testing",
+      "category": "Work",
+      "description": "",
+      "completed": false
+    },
+    {
+      "id": "90",
+      "text": "daar gaan we nog eens!",
+      "category": "Personal",
+      "description": "",
+      "completed": false
     }
   ],
   "categories": [

@@ -18,7 +18,6 @@ export const todoApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
   tagTypes: ["Todo", "Category"],
   endpoints: (builder) => ({
-    // Queries
     getTodos: builder.query<Todo[], void>({
       query: () => "/todos",
       providesTags: ["Todo"],
@@ -36,13 +35,29 @@ export const todoApi = createApi({
       providesTags: ["Todo"],
     }),
 
-    // Mutations
     addTodo: builder.mutation<Todo, Omit<Todo, "id">>({
-      query: (todo) => ({
-        url: "/todos",
-        method: "POST",
-        body: todo,
-      }),
+      queryFn: async (todo) => {
+        const response = await fetch("http://localhost:3000/todos");
+        const todos = await response.json();
+        const maxId = Math.max(...todos.map((t: Todo) => parseInt(t.id) || 0));
+        const nextId = (maxId + 1).toString();
+
+        const newTodo = { ...todo, id: nextId };
+
+        const postResponse = await fetch("http://localhost:3000/todos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newTodo),
+        });
+
+        if (!postResponse.ok) {
+          throw new Error("Failed to add todo");
+        }
+
+        return { data: newTodo };
+      },
       invalidatesTags: ["Todo"],
     }),
 

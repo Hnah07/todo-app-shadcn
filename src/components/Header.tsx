@@ -32,7 +32,7 @@ const Header = () => {
   );
   const [newTodoCategory, setNewTodoCategory] = useState("all");
   const [newTodoText, setNewTodoText] = useState("");
-  const [addTodo] = useAddTodoMutation();
+  const [addTodo, { isLoading }] = useAddTodoMutation();
   return (
     <header className="flex w-full flex-col items-center justify-between gap-4">
       <div className="flex w-full justify-between">
@@ -79,19 +79,25 @@ const Header = () => {
           </SelectContent>
         </Select>
         <Button
-          disabled={newTodoCategory === "all" || !newTodoText.trim()}
+          disabled={
+            newTodoCategory === "all" || !newTodoText.trim() || isLoading
+          }
           className="cursor-pointer"
-          onClick={() => {
-            addTodo({
-              text: newTodoText,
-              category: newTodoCategory,
-              description: "",
-              completed: false,
-            });
-            setNewTodoText("");
+          onClick={async () => {
+            try {
+              await addTodo({
+                text: newTodoText,
+                category: newTodoCategory,
+                description: "",
+                completed: false,
+              }).unwrap();
+              setNewTodoText("");
+            } catch (error) {
+              console.error("Failed to add todo:", error);
+            }
           }}
         >
-          + Add
+          {isLoading ? "Adding..." : "+ Add"}
         </Button>
       </div>
       <div className="flex w-full gap-2">
