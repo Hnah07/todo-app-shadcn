@@ -1,5 +1,7 @@
+import Layout from "./components/Layout";
+
 const App = () => {
-  return <></>;
+  return <Layout></Layout>;
 };
 
 export default App;
