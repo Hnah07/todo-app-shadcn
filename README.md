@@ -2,7 +2,7 @@
 
 This exercise demonstrates the integration of React tools and libraries to build a todo application. The project combines the power of shadcn/ui for beautiful components, Redux Toolkit for state management, and React for the user interface.
 
-![Todo App Screenshot](/screenshot.png)
+![Todo App Screenshot](./public/screenshot.png)
 
 ## Technologies Used
 
