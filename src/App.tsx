@@ -20,6 +20,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Toaster, toast } from "sonner";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const App = () => {
   const { data: todos = [] } = useGetTodosQuery();
@@ -30,6 +32,9 @@ const App = () => {
   const [editingDescription, setEditingDescription] = useState<string>("");
   const [editingTitleId, setEditingTitleId] = useState<string | null>(null);
   const [editingTitle, setEditingTitle] = useState<string>("");
+  const { selectedCategory, selectedStatus } = useSelector(
+    (state: RootState) => state.filters,
+  );
 
   useEffect(() => {
     if (openId) {
@@ -73,11 +78,22 @@ const App = () => {
     });
   };
 
+  // Filter todos based on selected category and status
+  const filteredTodos = todos.filter((todo) => {
+    const categoryMatch =
+      selectedCategory === "all" || todo.category === selectedCategory;
+    const statusMatch =
+      selectedStatus === "all" ||
+      (selectedStatus === "completed" && todo.completed) ||
+      (selectedStatus === "active" && !todo.completed);
+    return categoryMatch && statusMatch;
+  });
+
   return (
     <Layout>
       <Toaster />
       <div className="space-y-4">
-        {[...todos]
+        {[...filteredTodos]
           .sort((a, b) => parseInt(b.id) - parseInt(a.id))
           .map((todo) => (
             <Collapsible
