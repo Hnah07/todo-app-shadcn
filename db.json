@@ -4,14 +4,14 @@
       "id": "1",
       "text": "Learn React",
       "description": "Go through tutorials and build small projects to understand React fundamentals.",
-      "completed": true,
+      "completed": false,
       "category": "Work"
     },
     {
       "id": "2",
       "text": "Build a todo app",
       "description": "Create a simple to-do list application using React and state management.",
-      "completed": false,
+      "completed": true,
       "category": "Work"
     },
     {
@@ -113,72 +113,16 @@
       "category": "Learning"
     },
     {
-      "id": "d52a",
-      "text": "New Todo",
-      "category": "all",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "b617",
-      "text": "New Todo",
-      "category": "Personal",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "81b5",
-      "text": "",
-      "category": "all",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "88fd",
+      "id": "49",
       "text": "test",
-      "category": "Personal",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "d23d",
-      "text": "blablabla",
       "category": "Work",
       "description": "",
       "completed": false
     },
     {
-      "id": "a90a",
-      "text": "test",
-      "category": "Health",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "a90a",
-      "text": "nog een test wajoooo",
-      "category": "Shopping",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "30b9",
-      "text": "loading test",
+      "id": "50",
+      "text": "test loading",
       "category": "Work",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "89",
-      "text": "id testing",
-      "category": "Work",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "90",
-      "text": "daar gaan we nog eens!",
-      "category": "Personal",
       "description": "",
       "completed": false
     }

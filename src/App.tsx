@@ -1,7 +1,7 @@
 import Layout from "./components/Layout";
 import { Badge } from "./components/ui/badge";
 import { Checkbox } from "./components/ui/checkbox";
-import { useGetTodosQuery } from "./todoApi";
+import { useGetTodosQuery, useToggleTodoMutation } from "./todoApi";
 import { badgeVariants } from "./components/ui/badge";
 import {
   Collapsible,
@@ -15,6 +15,7 @@ import { Textarea } from "./components/ui/textarea";
 
 const App = () => {
   const { data: todos = [] } = useGetTodosQuery();
+  const [toggleTodo] = useToggleTodoMutation();
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
@@ -30,7 +31,12 @@ const App = () => {
             onOpenChange={(isOpen) => setOpenId(isOpen ? todo.id : null)}
           >
             <div className="flex items-center gap-2">
-              <Checkbox checked={todo.completed} />
+              <Checkbox
+                checked={todo.completed}
+                onCheckedChange={(checked) => {
+                  toggleTodo({ id: todo.id, completed: checked as boolean });
+                }}
+              />
               <p
                 className={`flex-1 ${todo.completed ? "text-gray-500 line-through" : ""}`}
               >
