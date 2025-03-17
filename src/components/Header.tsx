@@ -17,11 +17,11 @@ import {
 } from "./ui/select";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory, setStatus } from "../store/filterSlice";
-import { useGetCategoriesQuery } from "../todoApi";
-import type { Category } from "../todoApi";
+import { setCategory, setStatus } from "@/store/filterSlice";
+import { useGetCategoriesQuery } from "@/todoApi";
+import type { Category } from "@/todoApi";
 import { AppDispatch, RootState } from "@/store/store";
-import { useAddTodoMutation } from "../todoApi";
+import { useAddTodoMutation } from "@/todoApi";
 
 const Header = () => {
   const { setTheme, theme } = useTheme();

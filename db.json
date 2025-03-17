@@ -46,7 +46,7 @@
       "id": "7",
       "text": "Review project timeline",
       "description": "Check the current status of tasks and deadlines in the project plan.",
-      "completed": true,
+      "completed": false,
       "category": "Work"
     },
     {
@@ -95,7 +95,7 @@
       "id": "40",
       "text": "Drink 8 glasses of water",
       "description": "Ensure proper hydration by drinking enough water throughout the day.",
-      "completed": true,
+      "completed": false,
       "category": "Health"
     },
     {
@@ -109,13 +109,20 @@
       "id": "48",
       "text": "Read chapter of technical book",
       "description": "Read and understand a chapter from a technical book to enhance knowledge.",
-      "completed": true,
+      "completed": false,
       "category": "Learning"
     },
     {
       "id": "49",
       "text": "test",
-      "category": "Work",
+      "category": "Personal",
+      "description": "",
+      "completed": true
+    },
+    {
+      "id": "50",
+      "text": "test",
+      "category": "Shopping",
       "description": "",
       "completed": false
     }
@@ -123,23 +130,28 @@
   "categories": [
     {
       "name": "Work",
-      "color": "#f59e0b"
+      "color": "#f59e0b",
+      "id": "0ad7"
     },
     {
       "name": "Personal",
-      "color": "#ef4444"
+      "color": "#ef4444",
+      "id": "f92d"
     },
     {
       "name": "Shopping",
-      "color": "#3b82f6"
+      "color": "#3b82f6",
+      "id": "671a"
     },
     {
       "name": "Health",
-      "color": "#10b981"
+      "color": "#10b981",
+      "id": "cb03"
     },
     {
       "name": "Learning",
-      "color": "#8b5cf6"
+      "color": "#8b5cf6",
+      "id": "7a4f"
     }
   ]
 }

@@ -1,21 +1,21 @@
-import Layout from "./components/Layout";
-import { Badge } from "./components/ui/badge";
-import { Checkbox } from "./components/ui/checkbox";
+import Layout from "@/components/Layout";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   useGetTodosQuery,
   useToggleTodoMutation,
   useDeleteTodoMutation,
-} from "./todoApi";
-import { badgeVariants } from "./components/ui/badge";
+} from "@/todoApi";
+import { badgeVariants } from "@/components/ui/badge";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "./components/ui/collapsible";
+} from "@/components/ui/collapsible";
 import { ChevronDown, ChevronUp, Pencil, X } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./components/ui/button";
-import { Textarea } from "./components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const App = () => {
   const { data: todos = [] } = useGetTodosQuery();
