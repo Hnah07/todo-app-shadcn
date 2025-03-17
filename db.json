@@ -111,6 +111,13 @@
       "description": "Read and understand a chapter from a technical book to enhance knowledge.",
       "completed": true,
       "category": "Learning"
+    },
+    {
+      "id": "49",
+      "text": "test",
+      "category": "Work",
+      "description": "",
+      "completed": false
     }
   ],
   "categories": [
