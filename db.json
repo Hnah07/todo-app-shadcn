@@ -118,34 +118,6 @@
       "category": "Personal",
       "description": "",
       "completed": true
-    },
-    {
-      "id": "50",
-      "text": "Testing title edit",
-      "category": "Shopping",
-      "description": "sdfasdfasdfwgsg",
-      "completed": false
-    },
-    {
-      "id": "51",
-      "text": "testt",
-      "category": "Shopping",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "52",
-      "text": "test",
-      "category": "Work",
-      "description": "",
-      "completed": false
-    },
-    {
-      "id": "53",
-      "text": "testje",
-      "category": "Health",
-      "description": "",
-      "completed": false
     }
   ],
   "categories": [

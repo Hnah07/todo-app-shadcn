@@ -75,7 +75,7 @@ const Header = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="flex w-full justify-between gap-2">
+      <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-between">
         <Input
           placeholder="Add a new todo..."
           value={newTodoText}
@@ -90,31 +90,34 @@ const Header = () => {
               handleAddTodo();
             }
           }}
+          className="w-full"
         />
-        <Select value={newTodoCategory} onValueChange={setNewTodoCategory}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select a category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all" disabled>
-              Select a category
-            </SelectItem>
-            {categories.map((category: Category) => (
-              <SelectItem key={category.name} value={category.name}>
-                {category.name}
+        <div className="flex gap-2">
+          <Select value={newTodoCategory} onValueChange={setNewTodoCategory}>
+            <SelectTrigger className="w-[140px]">
+              <SelectValue placeholder="Select a category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all" disabled>
+                Select a category
               </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Button
-          disabled={
-            newTodoCategory === "all" || !newTodoText.trim() || isLoading
-          }
-          className="cursor-pointer"
-          onClick={handleAddTodo}
-        >
-          {isLoading ? "Adding..." : "+ Add"}
-        </Button>
+              {categories.map((category: Category) => (
+                <SelectItem key={category.name} value={category.name}>
+                  {category.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Button
+            disabled={
+              newTodoCategory === "all" || !newTodoText.trim() || isLoading
+            }
+            className="cursor-pointer"
+            onClick={handleAddTodo}
+          >
+            {isLoading ? "Adding..." : "+ Add"}
+          </Button>
+        </div>
       </div>
       <div className="flex w-full gap-2">
         <Select
