@@ -1,7 +1,11 @@
 import Layout from "./components/Layout";
 import { Badge } from "./components/ui/badge";
 import { Checkbox } from "./components/ui/checkbox";
-import { useGetTodosQuery, useToggleTodoMutation } from "./todoApi";
+import {
+  useGetTodosQuery,
+  useToggleTodoMutation,
+  useDeleteTodoMutation,
+} from "./todoApi";
 import { badgeVariants } from "./components/ui/badge";
 import {
   Collapsible,
@@ -16,6 +20,7 @@ import { Textarea } from "./components/ui/textarea";
 const App = () => {
   const { data: todos = [] } = useGetTodosQuery();
   const [toggleTodo] = useToggleTodoMutation();
+  const [deleteTodo] = useDeleteTodoMutation();
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
@@ -64,6 +69,7 @@ const App = () => {
                   variant="ghost"
                   size="icon"
                   className="h-8 w-8 text-gray-600 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"
+                  onClick={() => deleteTodo(todo.id)}
                 >
                   <X className="size-4" />
                 </Button>
