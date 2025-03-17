@@ -139,6 +139,13 @@
       "category": "Work",
       "description": "",
       "completed": false
+    },
+    {
+      "id": "53",
+      "text": "testje",
+      "category": "Health",
+      "description": "",
+      "completed": false
     }
   ],
   "categories": [
