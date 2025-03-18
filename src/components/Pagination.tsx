@@ -26,15 +26,14 @@ const Pagination = ({ totalItems }: PaginationProps) => {
     (state: RootState) => state.pagination,
   );
 
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+  const hasMultiplePages = totalPages > 1;
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       dispatch(setCurrentPage(page));
     }
   };
-
-  if (totalPages <= 1) return null;
 
   return (
     <div className="flex flex-col items-center gap-4 text-sm sm:flex-row sm:items-center sm:justify-between">
@@ -68,7 +67,7 @@ const Pagination = ({ totalItems }: PaginationProps) => {
           variant="outline"
           size="sm"
           onClick={() => handlePageChange(1)}
-          disabled={currentPage === 1}
+          disabled={!hasMultiplePages || currentPage === 1}
           className="h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3"
         >
           <ChevronsLeft className="h-4 w-4 sm:hidden" />
@@ -78,7 +77,7 @@ const Pagination = ({ totalItems }: PaginationProps) => {
           variant="outline"
           size="sm"
           onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          disabled={!hasMultiplePages || currentPage === 1}
           className="h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3"
         >
           <ChevronLeft className="h-4 w-4 sm:hidden" />
@@ -93,7 +92,7 @@ const Pagination = ({ totalItems }: PaginationProps) => {
           variant="outline"
           size="sm"
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={!hasMultiplePages || currentPage === totalPages}
           className="h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3"
         >
           <ChevronRight className="h-4 w-4 sm:hidden" />
@@ -103,7 +102,7 @@ const Pagination = ({ totalItems }: PaginationProps) => {
           variant="outline"
           size="sm"
           onClick={() => handlePageChange(totalPages)}
-          disabled={currentPage === totalPages}
+          disabled={!hasMultiplePages || currentPage === totalPages}
           className="h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3"
         >
           <ChevronsRight className="h-4 w-4 sm:hidden" />
