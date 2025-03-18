@@ -15,7 +15,9 @@ export interface Todo {
 
 export const todoApi = createApi({
   reducerPath: "todoApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://equal-continuous-raft.glitch.me",
+  }),
   tagTypes: ["Todo", "Category"],
   endpoints: (builder) => ({
     getTodos: builder.query<Todo[], void>({
@@ -37,20 +39,25 @@ export const todoApi = createApi({
 
     addTodo: builder.mutation<Todo, Omit<Todo, "id">>({
       queryFn: async (todo) => {
-        const response = await fetch("http://localhost:3000/todos");
+        const response = await fetch(
+          "https://equal-continuous-raft.glitch.me/todos",
+        );
         const todos = await response.json();
         const maxId = Math.max(...todos.map((t: Todo) => parseInt(t.id) || 0));
         const nextId = (maxId + 1).toString();
 
         const newTodo = { ...todo, id: nextId };
 
-        const postResponse = await fetch("http://localhost:3000/todos", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const postResponse = await fetch(
+          "https://equal-continuous-raft.glitch.me/todos",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newTodo),
           },
-          body: JSON.stringify(newTodo),
-        });
+        );
 
         if (!postResponse.ok) {
           throw new Error("Failed to add todo");
