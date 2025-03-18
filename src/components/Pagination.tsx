@@ -37,7 +37,7 @@ const Pagination = ({ totalItems }: PaginationProps) => {
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex flex-col items-center gap-4 py-4 text-sm sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col items-center gap-4 text-sm sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center justify-center gap-2 sm:justify-start">
         <span className="hidden sm:inline">Show:</span>
         <Select
