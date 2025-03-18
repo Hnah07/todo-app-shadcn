@@ -132,11 +132,11 @@ const App = () => {
                   }}
                 />
                 {editingTitleId === todo.id ? (
-                  <div className="flex flex-1 items-center gap-2">
+                  <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center">
                     <Input
                       value={editingTitle}
                       onChange={(e) => setEditingTitle(e.target.value)}
-                      className="h-8"
+                      className="w-full"
                       autoFocus
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
@@ -144,22 +144,24 @@ const App = () => {
                         }
                       }}
                     />
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={() => handleTitleSave(todo)}
-                    >
-                      <Check className="size-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={() => setEditingTitleId(null)}
-                    >
-                      <X className="size-4" />
-                    </Button>
+                    <div className="flex items-center justify-end gap-2">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => handleTitleSave(todo)}
+                      >
+                        <Check className="size-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => setEditingTitleId(null)}
+                      >
+                        <X className="size-4" />
+                      </Button>
+                    </div>
                   </div>
                 ) : (
                   <p
@@ -168,33 +170,39 @@ const App = () => {
                     {todo.text}
                   </p>
                 )}
-                <div className="flex items-center gap-2">
-                  <Badge variant={todo.category as keyof typeof badgeVariants}>
-                    {todo.category}
-                  </Badge>
-                  <CollapsibleTrigger>
-                    {openId === todo.id ? (
-                      <ChevronUp className="size-4" />
-                    ) : (
-                      <ChevronDown className="size-4" />
-                    )}
-                  </CollapsibleTrigger>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                    onClick={() => handleTitleEdit(todo)}
-                  >
-                    <Pencil className="size-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 text-gray-600 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"
-                    onClick={() => handleDelete(todo.id)}
-                  >
-                    <X className="size-4" />
-                  </Button>
+                <div className="flex flex-col items-end gap-2 sm:flex-row sm:items-center">
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                      onClick={() => handleTitleEdit(todo)}
+                    >
+                      <Pencil className="size-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-gray-600 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"
+                      onClick={() => handleDelete(todo.id)}
+                    >
+                      <X className="size-4" />
+                    </Button>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Badge
+                      variant={todo.category as keyof typeof badgeVariants}
+                    >
+                      {todo.category}
+                    </Badge>
+                    <CollapsibleTrigger>
+                      {openId === todo.id ? (
+                        <ChevronUp className="size-4" />
+                      ) : (
+                        <ChevronDown className="size-4" />
+                      )}
+                    </CollapsibleTrigger>
+                  </div>
                 </div>
               </div>
               <CollapsibleContent>
