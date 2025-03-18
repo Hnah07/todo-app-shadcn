@@ -206,7 +206,7 @@ const App = () => {
                 </div>
               </div>
               <CollapsibleContent>
-                <div className="-mx-4 my-2 h-px w-[calc(100%+2rem)] bg-gray-200" />
+                <div className="-mx-6 my-2 h-px w-[calc(100%+3rem)] bg-gray-200" />
                 <p className="text-sm text-gray-500">Description</p>
                 <Textarea
                   className="mt-2 text-sm text-gray-500"
