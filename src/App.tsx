@@ -22,6 +22,7 @@ import { Toaster, toast } from "sonner";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Pagination from "@/components/Pagination";
+import Stats from "@/components/Stats";
 
 const App = () => {
   const { data: todos = [] } = useGetTodosQuery();
@@ -206,6 +207,7 @@ const App = () => {
         ))}
       </div>
       <Pagination totalItems={filteredTodos.length} />
+      <Stats todos={todos} />
     </>
   );
 };
