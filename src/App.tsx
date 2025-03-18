@@ -171,7 +171,7 @@ const App = () => {
                   </p>
                 )}
                 <div className="flex flex-col items-end gap-2 sm:flex-row sm:items-center">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-end gap-2">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -189,13 +189,13 @@ const App = () => {
                       <X className="size-4" />
                     </Button>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-end gap-2">
                     <Badge
                       variant={todo.category as keyof typeof badgeVariants}
                     >
                       {todo.category}
                     </Badge>
-                    <CollapsibleTrigger>
+                    <CollapsibleTrigger className="flex h-8 w-8 items-center justify-center">
                       {openId === todo.id ? (
                         <ChevronUp className="size-4" />
                       ) : (
