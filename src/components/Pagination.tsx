@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { setCurrentPage, setItemsPerPage } from "@/store/filterSlice";
+import { setCurrentPage, setItemsPerPage } from "@/store/paginationSlice";
 import {
   Select,
   SelectContent,
@@ -23,7 +23,7 @@ interface PaginationProps {
 const Pagination = ({ totalItems }: PaginationProps) => {
   const dispatch = useDispatch();
   const { currentPage, itemsPerPage } = useSelector(
-    (state: RootState) => state.filters,
+    (state: RootState) => state.pagination,
   );
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);

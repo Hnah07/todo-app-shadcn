@@ -33,8 +33,12 @@ const App = () => {
   const [editingDescription, setEditingDescription] = useState<string>("");
   const [editingTitleId, setEditingTitleId] = useState<string | null>(null);
   const [editingTitle, setEditingTitle] = useState<string>("");
-  const { selectedCategory, selectedStatus, currentPage, itemsPerPage } =
-    useSelector((state: RootState) => state.filters);
+  const { selectedCategory, selectedStatus } = useSelector(
+    (state: RootState) => state.filters,
+  );
+  const { currentPage, itemsPerPage } = useSelector(
+    (state: RootState) => state.pagination,
+  );
 
   useEffect(() => {
     if (openId) {
