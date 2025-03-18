@@ -1,8 +1,20 @@
 import { Button } from "./ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { setCurrentPage } from "@/store/filterSlice";
+import { setCurrentPage, setItemsPerPage } from "@/store/filterSlice";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
 interface PaginationProps {
   totalItems: number;
@@ -25,35 +37,79 @@ const Pagination = ({ totalItems }: PaginationProps) => {
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex items-center justify-center gap-2 py-4">
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        <ChevronLeft className="size-4" />
-      </Button>
-      <div className="flex items-center gap-1">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-          <Button
-            key={page}
-            variant={currentPage === page ? "default" : "outline"}
-            size="sm"
-            onClick={() => handlePageChange(page)}
-          >
-            {page}
-          </Button>
-        ))}
+    <div className="flex flex-col items-center gap-4 py-4 text-sm sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-center gap-2 sm:justify-start">
+        <span className="hidden sm:inline">Show:</span>
+        <Select
+          value={itemsPerPage.toString()}
+          onValueChange={(value) => dispatch(setItemsPerPage(Number(value)))}
+        >
+          <SelectTrigger className="h-8 w-[120px] text-sm sm:w-[130px]">
+            <SelectValue placeholder="Per page" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="5" className="text-sm">
+              5 per page
+            </SelectItem>
+            <SelectItem value="10" className="text-sm">
+              10 per page
+            </SelectItem>
+            <SelectItem value="15" className="text-sm">
+              15 per page
+            </SelectItem>
+            <SelectItem value="20" className="text-sm">
+              20 per page
+            </SelectItem>
+          </SelectContent>
+        </Select>
       </div>
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      >
-        <ChevronRight className="size-4" />
-      </Button>
+      <div className="flex items-center justify-center gap-1 sm:gap-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(1)}
+          disabled={currentPage === 1}
+          className="h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3"
+        >
+          <ChevronsLeft className="h-4 w-4 sm:hidden" />
+          <span className="hidden sm:inline">First</span>
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3"
+        >
+          <ChevronLeft className="h-4 w-4 sm:hidden" />
+          <span className="hidden sm:inline">Previous</span>
+        </Button>
+        <div className="flex items-center px-1 sm:px-2">
+          <span className="text-sm whitespace-nowrap">
+            Page {currentPage} of {totalPages}
+          </span>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3"
+        >
+          <ChevronRight className="h-4 w-4 sm:hidden" />
+          <span className="hidden sm:inline">Next</span>
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(totalPages)}
+          disabled={currentPage === totalPages}
+          className="h-8 w-8 p-0 sm:h-9 sm:w-auto sm:px-3"
+        >
+          <ChevronsRight className="h-4 w-4 sm:hidden" />
+          <span className="hidden sm:inline">Last</span>
+        </Button>
+      </div>
     </div>
   );
 };
