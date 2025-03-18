@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -78,7 +77,6 @@ const App = () => {
     });
   };
 
-  // Filter todos based on selected category and status
   const filteredTodos = todos.filter((todo) => {
     const categoryMatch =
       selectedCategory === "all" || todo.category === selectedCategory;
@@ -89,7 +87,6 @@ const App = () => {
     return categoryMatch && statusMatch;
   });
 
-  // Sort and paginate todos
   const sortedTodos = [...filteredTodos].sort(
     (a, b) => parseInt(b.id) - parseInt(a.id),
   );
@@ -100,7 +97,7 @@ const App = () => {
   );
 
   return (
-    <Layout>
+    <>
       <Toaster />
       <div className="space-y-4">
         {paginatedTodos.map((todo) => (
@@ -207,9 +204,9 @@ const App = () => {
             </CollapsibleContent>
           </Collapsible>
         ))}
-        <Pagination totalItems={filteredTodos.length} />
       </div>
-    </Layout>
+      <Pagination totalItems={filteredTodos.length} />
+    </>
   );
 };
 

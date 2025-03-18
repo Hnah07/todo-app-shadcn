@@ -20,21 +20,21 @@ const filterSlice = createSlice({
   reducers: {
     setCategory: (state, action: PayloadAction<string>) => {
       state.selectedCategory = action.payload;
-      state.currentPage = 1; // Reset to first page when category changes
+      state.currentPage = 1;
     },
     setStatus: (
       state,
       action: PayloadAction<"all" | "completed" | "active">,
     ) => {
       state.selectedStatus = action.payload;
-      state.currentPage = 1; // Reset to first page when status changes
+      state.currentPage = 1;
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
     setItemsPerPage: (state, action: PayloadAction<number>) => {
       state.itemsPerPage = action.payload;
-      state.currentPage = 1; // Reset to first page when items per page changes
+      state.currentPage = 1;
     },
   },
 });
